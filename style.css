@@ -1,16 +1,16 @@
 :root {
   --bg-dark: #070814;
-  --bg-gradient: radial-gradient(circle at 50% 20%, #171938 0%, #080918 60%, #03040a 100%);
+  --bg-gradient: radial-gradient(circle at 50% 30%, #171938 0%, #080918 60%, #03040a 100%);
   --gold-primary: #ffd15c;
-  --gold-glow: rgba(255, 209, 92, 0.4);
+  --gold-glow: rgba(255, 209, 92, 0.45);
   --pink-neon: #ff5e8a;
   --pink-glow: rgba(255, 94, 138, 0.35);
   --violet-accent: #9d4edd;
   --text-main: #f8f9fa;
   --text-muted: #a0a5ba;
-  --glass-bg: rgba(18, 20, 39, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  --glass-bg: rgba(18, 20, 39, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -58,7 +58,7 @@ canvas#confetti-canvas {
   z-index: 10;
 }
 
-/* Main Container - Full height flex with scroll protection */
+/* Main Container - Centered, balanced composition */
 .scene-container {
   position: relative;
   z-index: 5;
@@ -68,16 +68,16 @@ canvas#confetti-canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(0.75rem, 2.5vh, 2rem);
-  padding: max(1.2rem, env(safe-area-inset-top)) 1rem max(5.8rem, calc(env(safe-area-inset-bottom) + 5.2rem));
+  justify-content: center; /* UNIFIED CENTERPIECE */
+  gap: clamp(1rem, 3vh, 2.4rem);
+  padding: max(1.5rem, env(safe-area-inset-top)) 1.2rem max(6.2rem, calc(env(safe-area-inset-bottom) + 5.5rem));
   box-sizing: border-box;
 }
 
 /* Greeting Header */
 .greeting-wrapper {
   text-align: center;
-  max-width: min(760px, 92vw);
+  max-width: min(780px, 92vw);
   width: 100%;
   margin: 0 auto;
   animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -86,26 +86,27 @@ canvas#confetti-canvas {
 .sparkle-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.95rem;
-  background: rgba(255, 209, 92, 0.1);
-  border: 1px solid rgba(255, 209, 92, 0.25);
+  gap: 0.45rem;
+  padding: 0.35rem 1.1rem;
+  background: rgba(255, 209, 92, 0.12);
+  border: 1px solid rgba(255, 209, 92, 0.3);
   border-radius: 999px;
   backdrop-filter: blur(8px);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 0 20px rgba(255, 209, 92, 0.15);
 }
 
 .badge-text {
-  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
+  font-size: clamp(0.75rem, 1.8vw, 0.88rem);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-primary);
   text-shadow: 0 0 10px var(--gold-glow);
 }
 
 .sparkle-icon {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   animation: pulse 2s infinite ease-in-out;
 }
 
@@ -113,46 +114,46 @@ canvas#confetti-canvas {
   display: flex;
   flex-direction: column;
   line-height: 0.95;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .title-sub {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(1.1rem, 3.4vw, 2.6rem);
+  font-size: clamp(1.2rem, 3.8vw, 2.8rem);
   font-weight: 800;
-  letter-spacing: clamp(0.15em, 1.2vw, 0.35em);
-  text-indent: clamp(0.15em, 1.2vw, 0.35em);
+  letter-spacing: clamp(0.18em, 1.4vw, 0.35em);
+  text-indent: clamp(0.18em, 1.4vw, 0.35em);
   color: #fff;
   opacity: 0.92;
-  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.35);
 }
 
 .title-main {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.3rem, 7vw, 5.5rem);
+  font-size: clamp(2.6rem, 7.5vw, 6rem);
   font-weight: 900;
   letter-spacing: clamp(0.02em, 0.8vw, 0.05em);
-  background: linear-gradient(135deg, #fff 0%, #ffeaa7 40%, #ff7675 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffeaa7 35%, #ff7675 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 20px rgba(255, 118, 117, 0.35));
+  filter: drop-shadow(0 4px 22px rgba(255, 118, 117, 0.4));
 }
 
 .recipient-name-container {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  margin: 0.25rem 0 0.5rem;
+  margin: 0.35rem 0 0.65rem;
   max-width: 95vw;
 }
 
 .recipient-name {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(1.5rem, 4.5vw, 3rem);
+  font-size: clamp(1.7rem, 4.8vw, 3.2rem);
   font-weight: 700;
   color: var(--gold-primary);
-  text-shadow: 0 0 25px var(--gold-glow);
+  text-shadow: 0 0 28px var(--gold-glow);
   letter-spacing: 0.02em;
   word-break: break-word;
   text-align: center;
@@ -160,26 +161,26 @@ canvas#confetti-canvas {
 }
 
 .name-underline {
-  width: min(80px, 40%);
+  width: min(90px, 45%);
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
   border-radius: 2px;
 }
 
 .wish-preview {
-  font-size: clamp(0.85rem, 2.1vw, 1.1rem);
+  font-size: clamp(0.88rem, 2.2vw, 1.15rem);
   color: var(--text-muted);
-  max-width: min(580px, 92vw);
+  max-width: min(620px, 92vw);
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.55;
   font-style: italic;
   font-weight: 300;
-  padding: 0 0.4rem;
+  padding: 0 0.5rem;
 }
 
 /* =========================================
-   Interactive 3D Cake Design
+   Interactive 3D Cake Design - Grand & Prominent
    ========================================= */
 .cake-stage {
   display: flex;
@@ -188,7 +189,7 @@ canvas#confetti-canvas {
   cursor: pointer;
   perspective: 1000px;
   margin: 0.5rem 0;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, floatCake 5s ease-in-out infinite alternate;
   opacity: 0;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   flex-shrink: 0;
@@ -196,7 +197,7 @@ canvas#confetti-canvas {
 }
 
 .cake-stage:hover {
-  transform: scale(1.04);
+  transform: scale(1.05) translateY(-4px);
 }
 
 .cake-stage:active {
@@ -205,8 +206,8 @@ canvas#confetti-canvas {
 
 .cake {
   position: relative;
-  width: 210px;
-  height: 170px;
+  width: 240px;
+  height: 195px;
 }
 
 /* Plate */
@@ -215,11 +216,11 @@ canvas#confetti-canvas {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px;
-  height: 24px;
-  background: linear-gradient(to right, #cfd8dc, #eceff1, #b0bec5);
+  width: 290px;
+  height: 26px;
+  background: linear-gradient(to right, #cfd8dc, #ffffff, #b0bec5);
   border-radius: 50%;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.65), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 209, 92, 0.2), inset 0 2px 5px rgba(255, 255, 255, 0.9);
 }
 
 /* Cake Layers */
@@ -227,28 +228,28 @@ canvas#confetti-canvas {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 12px 12px 8px 8px;
-  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.3), inset 0 -6px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 14px 14px 8px 8px;
+  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.35), inset 0 -6px 10px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .layer-bottom {
-  bottom: 12px;
-  width: 190px;
-  height: 52px;
-  background: linear-gradient(to bottom, #ff9a9e 0%, #fecfef 20%, #f77062 100%);
+  bottom: 14px;
+  width: 220px;
+  height: 60px;
+  background: linear-gradient(to bottom, #ff9a9e 0%, #fecfef 25%, #f77062 100%);
 }
 
 .layer-middle {
-  bottom: 60px;
-  width: 145px;
-  height: 44px;
+  bottom: 68px;
+  width: 170px;
+  height: 50px;
   background: linear-gradient(to bottom, #a1c4fd 0%, #c2e9fb 30%, #667eea 100%);
 }
 
 .layer-top {
-  bottom: 100px;
-  width: 105px;
-  height: 38px;
+  bottom: 114px;
+  width: 120px;
+  height: 44px;
   background: linear-gradient(to bottom, #ffeaa7 0%, #fab1a0 100%);
 }
 
@@ -258,30 +259,30 @@ canvas#confetti-canvas {
   top: 0;
   background: #ffffff;
   border-radius: 0 0 10px 10px;
-  opacity: 0.9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  opacity: 0.92;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
-.layer-bottom .drip-1 { left: 15px; width: 22px; height: 16px; }
-.layer-bottom .drip-2 { left: 55px; width: 24px; height: 22px; }
-.layer-bottom .drip-3 { left: 105px; width: 20px; height: 15px; }
-.layer-bottom .drip-4 { left: 150px; width: 22px; height: 19px; }
+.layer-bottom .drip-1 { left: 18px; width: 25px; height: 18px; }
+.layer-bottom .drip-2 { left: 65px; width: 28px; height: 25px; }
+.layer-bottom .drip-3 { left: 120px; width: 24px; height: 17px; }
+.layer-bottom .drip-4 { left: 175px; width: 26px; height: 22px; }
 
-.layer-middle .drip-1 { left: 20px; width: 20px; height: 15px; }
-.layer-middle .drip-2 { left: 60px; width: 26px; height: 20px; }
-.layer-middle .drip-3 { left: 105px; width: 18px; height: 14px; }
+.layer-middle .drip-1 { left: 24px; width: 23px; height: 17px; }
+.layer-middle .drip-2 { left: 70px; width: 30px; height: 23px; }
+.layer-middle .drip-3 { left: 122px; width: 21px; height: 16px; }
 
-.layer-top .drip-1 { left: 22px; width: 24px; height: 16px; }
-.layer-top .drip-2 { left: 65px; width: 22px; height: 15px; }
+.layer-top .drip-1 { left: 26px; width: 28px; height: 18px; }
+.layer-top .drip-2 { left: 75px; width: 26px; height: 17px; }
 
 /* Candles */
 .candles-container {
   position: absolute;
-  bottom: 138px;
+  bottom: 156px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;
-  height: 34px;
+  width: 100px;
+  height: 38px;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
@@ -289,26 +290,26 @@ canvas#confetti-canvas {
 
 .candle {
   position: relative;
-  width: 9px;
-  height: 32px;
+  width: 10px;
+  height: 36px;
   background: repeating-linear-gradient(
     45deg,
     #ffd15c,
-    #ffd15c 4px,
-    #ff4757 4px,
-    #ff4757 8px
+    #ffd15c 5px,
+    #ff4757 5px,
+    #ff4757 10px
   );
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .wick {
   position: absolute;
-  top: -7px;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 7px;
+  height: 8px;
   background: #2d3436;
   border-radius: 1px;
 }
@@ -319,11 +320,11 @@ canvas#confetti-canvas {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
-  width: 13px;
-  height: 22px;
+  width: 15px;
+  height: 25px;
   background: radial-gradient(ellipse at bottom, #fff 15%, #ffd15c 50%, #ff4757 95%);
   border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
-  filter: drop-shadow(0 0 10px rgba(255, 209, 92, 0.95)) drop-shadow(0 0 22px rgba(255, 71, 87, 0.7));
+  filter: drop-shadow(0 0 12px rgba(255, 209, 92, 0.95)) drop-shadow(0 0 26px rgba(255, 71, 87, 0.75));
   animation: flameFlicker 1.4s infinite ease-in-out alternate;
   transform-origin: 50% 90%;
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -351,9 +352,9 @@ canvas#confetti-canvas {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  background: rgba(230, 230, 230, 0.8);
+  width: 7px;
+  height: 7px;
+  background: rgba(230, 230, 230, 0.85);
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
@@ -367,17 +368,17 @@ canvas#confetti-canvas {
 .cake-hint {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.85rem;
-  padding: 0.35rem 0.9rem;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.4rem 1.1rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 999px;
-  font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+  font-size: clamp(0.78rem, 1.8vw, 0.88rem);
   font-weight: 500;
   color: var(--text-muted);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
   transition: all 0.3s ease;
   text-align: center;
   max-width: 90vw;
@@ -385,30 +386,31 @@ canvas#confetti-canvas {
 
 .cake-hint.blown-state {
   color: #2ed573;
-  border-color: rgba(46, 213, 115, 0.4);
-  background: rgba(46, 213, 115, 0.1);
+  border-color: rgba(46, 213, 115, 0.45);
+  background: rgba(46, 213, 115, 0.12);
+  box-shadow: 0 4px 20px rgba(46, 213, 115, 0.25);
 }
 
 /* =========================================
-   Floating Action Dock - Fluid & Touch Safe
+   Floating Action Dock
    ========================================= */
 .dock {
   position: fixed;
-  bottom: max(1rem, env(safe-area-inset-bottom));
+  bottom: max(1.1rem, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: clamp(0.2rem, 1.2vw, 0.65rem);
-  padding: 0.45rem 0.6rem;
+  gap: clamp(0.25rem, 1.2vw, 0.65rem);
+  padding: 0.48rem 0.65rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
   box-shadow: var(--glass-shadow);
-  width: calc(100% - 1.8rem);
+  width: calc(100% - 2rem);
   max-width: 440px;
 }
 
@@ -418,8 +420,8 @@ canvas#confetti-canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.15rem;
-  padding: 0.45rem 0.35rem;
+  gap: 0.18rem;
+  padding: 0.48rem 0.35rem;
   background: transparent;
   border: none;
   border-radius: 14px;
@@ -441,12 +443,12 @@ canvas#confetti-canvas {
 }
 
 .dock-icon {
-  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+  font-size: clamp(1.15rem, 2.5vw, 1.3rem);
   line-height: 1;
 }
 
 .dock-label {
-  font-size: clamp(0.65rem, 1.6vw, 0.72rem);
+  font-size: clamp(0.66rem, 1.6vw, 0.74rem);
   font-weight: 500;
   color: var(--text-muted);
   letter-spacing: 0.01em;
@@ -500,7 +502,7 @@ canvas#confetti-canvas {
 .audio-waves .bar:nth-child(3) { animation-delay: 0.5s; }
 
 /* =========================================
-   Modals - Responsive & Scroll-Safe
+   Modals
    ========================================= */
 .modal-backdrop {
   position: fixed;
@@ -509,7 +511,7 @@ canvas#confetti-canvas {
   width: 100%;
   height: 100%;
   background: rgba(4, 5, 12, 0.85);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   z-index: 50;
   display: flex;
   align-items: center;
@@ -725,26 +727,34 @@ canvas#confetti-canvas {
   display: none;
 }
 
-/* Audio Tip Popup */
+/* Audio Tip Floating Toast (Clean bottom-center toast that disappears) */
 .audio-tip {
   position: fixed;
-  top: max(1rem, env(safe-area-inset-top));
+  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 4.8rem);
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
-  background: rgba(23, 25, 48, 0.9);
-  border: 1px solid rgba(255, 209, 92, 0.3);
-  padding: 0.4rem 1rem;
+  background: rgba(18, 20, 39, 0.88);
+  border: 1px solid rgba(255, 209, 92, 0.35);
+  padding: 0.45rem 1.15rem;
   border-radius: 999px;
-  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  font-size: clamp(0.74rem, 1.8vw, 0.84rem);
   color: var(--gold-primary);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
   pointer-events: none;
   text-align: center;
   max-width: 90vw;
   white-space: nowrap;
-  animation: fadeInDown 1s ease forwards, fadeOutUp 1s ease 5s forwards;
+  animation: tipFadeInOut 6s ease 0.8s forwards;
+  opacity: 0;
+}
+
+@keyframes tipFadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 15px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -10px); pointer-events: none; }
 }
 
 /* =========================================
@@ -768,13 +778,8 @@ canvas#confetti-canvas {
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translate(-50%, -20px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-@keyframes fadeOutUp {
-  from { opacity: 1; transform: translate(-50%, 0); }
-  to { opacity: 0; transform: translate(-50%, -20px); }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
@@ -787,24 +792,43 @@ canvas#confetti-canvas {
   50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 6px var(--gold-primary)); }
 }
 
+@keyframes floatCake {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
 /* =========================================
-   Comprehensive Responsive Breakpoints
+   Responsive Breakpoints
    ========================================= */
+
+/* Desktop & Widescreen (Centerpiece stays unified) */
+@media (min-width: 1024px) {
+  .cake-stage {
+    transform: scale(1.05);
+  }
+}
+
+/* Tablet & Smaller Laptops */
+@media (max-width: 900px) {
+  .cake-stage {
+    transform: scale(0.95);
+  }
+}
 
 /* Mobile Portrait (< 600px) */
 @media (max-width: 600px) {
   .scene-container {
     padding: max(1rem, env(safe-area-inset-top)) 0.75rem max(5.6rem, calc(env(safe-area-inset-bottom) + 5rem));
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 
   .cake-stage {
-    transform: scale(0.88);
-    margin: 0.2rem 0;
+    transform: scale(0.85);
+    margin: 0.15rem 0;
   }
 
   .cake-stage:hover {
-    transform: scale(0.92);
+    transform: scale(0.88);
   }
 
   .dock {
@@ -821,11 +845,11 @@ canvas#confetti-canvas {
 /* Very Small Mobile (< 380px, e.g. iPhone SE, Fold) */
 @media (max-width: 380px) {
   .cake-stage {
-    transform: scale(0.78);
+    transform: scale(0.75);
   }
 
   .cake-stage:hover {
-    transform: scale(0.82);
+    transform: scale(0.78);
   }
 
   .title-sub {
@@ -846,27 +870,27 @@ canvas#confetti-canvas {
   }
 }
 
-/* Short Screen Heights (e.g. Mobile Portrait with Small Height < 720px) */
+/* Short Screen Heights (< 720px) */
 @media (max-height: 720px) {
   .scene-container {
     gap: 0.5rem;
   }
 
   .sparkle-badge {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
 
   .cake-stage {
-    transform: scale(0.8);
-    margin: 0.1rem 0;
+    transform: scale(0.76);
+    margin: 0;
   }
 
   .cake-stage:hover {
-    transform: scale(0.84);
+    transform: scale(0.8);
   }
 
   .cake-hint {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
   }
 
   .wish-preview {
@@ -877,17 +901,7 @@ canvas#confetti-canvas {
   }
 }
 
-/* Extremely Short Heights (e.g. < 600px) */
-@media (max-height: 600px) {
-  .cake-stage {
-    transform: scale(0.7);
-  }
-  .wish-preview {
-    display: none;
-  }
-}
-
-/* Mobile Landscape (< 900px wide, < 500px tall) */
+/* Landscape Mode on Phones */
 @media (orientation: landscape) and (max-height: 520px) {
   .scene-container {
     flex-direction: row;
@@ -919,7 +933,7 @@ canvas#confetti-canvas {
   }
 
   .cake-stage {
-    transform: scale(0.72);
+    transform: scale(0.7);
     margin: 0;
   }
 

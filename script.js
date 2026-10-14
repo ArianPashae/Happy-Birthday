@@ -310,19 +310,30 @@
       // Render Fireworks Rockets
       for (let i = this.fireworks.length - 1; i >= 0; i--) {
         const fw = this.fireworks[i];
-        fw.trail.push({ x: fw.x, y: fw.y });
-        if (fw.trail.length > 7) fw.trail.shift();
 
-        this.ctx.strokeStyle = fw.color;
-        this.ctx.lineWidth = 2.5;
+        // Emit sparkling glitter trail behind the rocket
+        this.particles.push({
+          x: fw.x + (Math.random() * 3 - 1.5),
+          y: fw.y + (Math.random() * 3 - 1.5),
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: Math.random() * 2 + 1,
+          color: Math.random() > 0.3 ? fw.color : '#ffffff',
+          alpha: 0.8,
+          decay: 0.05,
+          size: Math.random() * 1.6 + 0.8,
+          gravity: 0.04
+        });
+
+        // Glowing rocket ember tip
+        this.ctx.save();
+        this.ctx.globalAlpha = 1;
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.shadowColor = fw.color;
+        this.ctx.shadowBlur = 12;
         this.ctx.beginPath();
-        for (let j = 0; j < fw.trail.length; j++) {
-          const pt = fw.trail[j];
-          this.ctx.globalAlpha = (j + 1) / fw.trail.length * 0.8;
-          if (j === 0) this.ctx.moveTo(pt.x, pt.y);
-          else this.ctx.lineTo(pt.x, pt.y);
-        }
-        this.ctx.stroke();
+        this.ctx.arc(fw.x, fw.y, 2.5, 0, Math.PI * 2);
+        this.ctx.fill();
+        this.ctx.restore();
 
         fw.x += fw.vx;
         fw.y += fw.vy;
@@ -416,8 +427,10 @@
     }
 
     burstFromSides() {
-      this.fire(50, this.height * 0.75, 55, Math.PI / 3, -Math.PI / 4);
-      this.fire(this.width - 50, this.height * 0.75, 55, Math.PI / 3, -3 * Math.PI / 4);
+      const leftX = Math.max(50, this.width * 0.22);
+      const rightX = Math.min(this.width - 50, this.width * 0.78);
+      this.fire(leftX, this.height * 0.65, 55, Math.PI / 3, -Math.PI / 4);
+      this.fire(rightX, this.height * 0.65, 55, Math.PI / 3, -3 * Math.PI / 4);
     }
 
     updateAndRender() {
@@ -693,9 +706,9 @@
     // Initial festive welcoming burst
     setTimeout(() => {
       confetti.burstFromSides();
-      fireworks.launch(window.innerWidth * 0.3, window.innerHeight * 0.25);
-      fireworks.launch(window.innerWidth * 0.7, window.innerHeight * 0.25);
-    }, 800);
+      fireworks.explode(window.innerWidth * 0.3, window.innerHeight * 0.28, '#ffd15c');
+      fireworks.explode(window.innerWidth * 0.7, window.innerHeight * 0.28, '#ff5e8a');
+    }, 500);
 
     // Animation Loop
     function animate() {
