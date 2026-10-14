@@ -1,18 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Happy Birthday Arian Pashae!</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday! ✨ A Special Celebration</title>
+  
+  <!-- Open Graph / Meta -->
+  <meta name="description" content="An interactive, cinematic Happy Birthday celebration experience with fireworks, candles, music, and confetti.">
+  <meta property="og:title" content="Happy Birthday! ✨ A Magical Celebration">
+  <meta property="og:description" content="Blow out the candles, launch fireworks, and enjoy the birthday melody!">
+  <meta property="og:type" content="website">
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <canvas id=c></canvas>
-    <script src="./script.js"></script>
+  <!-- Background Fireworks & Stars Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <!-- Foreground Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
 
+  <!-- Main Hero Viewport -->
+  <main class="scene-container">
+    <div class="greeting-wrapper">
+      <div class="sparkle-badge">
+        <span class="sparkle-icon">✨</span>
+        <span class="badge-text">A Special Day To Celebrate</span>
+        <span class="sparkle-icon">✨</span>
+      </div>
+
+      <h1 class="main-title">
+        <span class="title-sub">HAPPY</span>
+        <span class="title-main">BIRTHDAY</span>
+      </h1>
+
+      <div class="recipient-name-container">
+        <span class="recipient-name" id="display-name">Arian Pashae</span>
+        <div class="name-underline"></div>
+      </div>
+
+      <p class="wish-preview" id="display-wish">
+        "Wishing you a year filled with boundless joy, limitless success, and unforgettable moments."
+      </p>
+    </div>
+
+    <!-- Interactive 3D Birthday Cake -->
+    <div class="cake-stage" id="cake-stage" title="Click to blow out or relight the candles!">
+      <div class="cake">
+        <!-- Plate -->
+        <div class="plate"></div>
+
+        <!-- Bottom Tier -->
+        <div class="layer layer-bottom">
+          <div class="layer-drip drip-1"></div>
+          <div class="layer-drip drip-2"></div>
+          <div class="layer-drip drip-3"></div>
+          <div class="layer-drip drip-4"></div>
+        </div>
+
+        <!-- Middle Tier -->
+        <div class="layer layer-middle">
+          <div class="layer-drip drip-1"></div>
+          <div class="layer-drip drip-2"></div>
+          <div class="layer-drip drip-3"></div>
+        </div>
+
+        <!-- Top Tier -->
+        <div class="layer layer-top">
+          <div class="layer-drip drip-1"></div>
+          <div class="layer-drip drip-2"></div>
+        </div>
+
+        <!-- Candles -->
+        <div class="candles-container">
+          <div class="candle candle-1">
+            <div class="wick"></div>
+            <div class="flame" id="flame-1"></div>
+            <div class="smoke"></div>
+          </div>
+          <div class="candle candle-2">
+            <div class="wick"></div>
+            <div class="flame" id="flame-2"></div>
+            <div class="smoke"></div>
+          </div>
+          <div class="candle candle-3">
+            <div class="wick"></div>
+            <div class="flame" id="flame-3"></div>
+            <div class="smoke"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cake-hint" id="cake-hint">
+        <span class="hint-icon">🎂</span>
+        <span id="hint-text">Click the cake to blow out candles!</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Floating Control Dock -->
+  <nav class="dock" role="toolbar" aria-label="Celebration Controls">
+    <button class="dock-btn" id="btn-music" title="Toggle Birthday Melody" aria-label="Toggle Music">
+      <span class="dock-icon" id="music-icon">🎵</span>
+      <span class="dock-label">Music</span>
+      <span class="audio-waves" id="audio-waves">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </span>
+    </button>
+
+    <button class="dock-btn" id="btn-blow" title="Blow / Relight Candles" aria-label="Blow Candles">
+      <span class="dock-icon" id="blow-icon">🕯️</span>
+      <span class="dock-label" id="blow-label">Blow</span>
+    </button>
+
+    <button class="dock-btn btn-primary" id="btn-confetti" title="Launch Confetti Cannon" aria-label="Confetti Cannon">
+      <span class="dock-icon">🎉</span>
+      <span class="dock-label">Confetti!</span>
+    </button>
+
+    <button class="dock-btn" id="btn-card" title="Open Birthday Card" aria-label="Open Card">
+      <span class="dock-icon">💌</span>
+      <span class="dock-label">Card</span>
+    </button>
+
+    <button class="dock-btn" id="btn-share" title="Customize & Share Link" aria-label="Share Link">
+      <span class="dock-icon">✨</span>
+      <span class="dock-label">Customize</span>
+    </button>
+  </nav>
+
+  <!-- Modal: Birthday Greeting Card -->
+  <div class="modal-backdrop" id="card-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="card-modal-close" aria-label="Close card">&times;</button>
+      <div class="card-inner">
+        <div class="card-decor-top">✦ ✧ ✦</div>
+        <h2 class="card-title">Happy Birthday!</h2>
+        <h3 class="card-recipient" id="card-recipient">Dear Arian Pashae,</h3>
+        <p class="card-body" id="card-body">
+          May your journey ahead be blessed with profound happiness, glowing health, and the courage to turn all your grandest dreams into reality. You illuminate the lives of those around you.
+        </p>
+        <div class="card-divider"></div>
+        <p class="card-quote">
+          "Count your life by smiles, not tears.<br>Count your age by friends, not years."
+        </p>
+        <div class="card-signature">With love & celebration ✨</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Customize & Share -->
+  <div class="modal-backdrop" id="share-modal" aria-hidden="true">
+    <div class="modal-card customize-modal">
+      <button class="modal-close" id="share-modal-close" aria-label="Close customize">&times;</button>
+      <h2 class="modal-title">Personalize This Celebration</h2>
+      <p class="modal-subtitle">Generate a custom link to send to someone special:</p>
+
+      <form id="customize-form" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label for="input-name">Recipient's Name</label>
+          <input type="text" id="input-name" placeholder="e.g. Arian Pashae" maxlength="40">
+        </div>
+
+        <div class="form-group">
+          <label for="input-wish">Personal Wish / Message</label>
+          <textarea id="input-wish" rows="3" placeholder="Write your heartfelt birthday wishes..." maxlength="250"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-action btn-apply" id="btn-apply-changes">Apply Now</button>
+          <button type="button" class="btn-action btn-copy" id="btn-copy-link">
+            <span id="copy-text">Copy Share Link</span>
+            <span class="copy-success" id="copy-success">Copied! 🎉</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ambient Sound Notice / Floating helper on first visit -->
+  <div class="audio-tip" id="audio-tip">
+    <span>💡 Tap anywhere to launch fireworks or hear the melody!</span>
+  </div>
+
+  <script src="./script.js"></script>
 </body>
-
 </html>
