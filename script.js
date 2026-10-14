@@ -194,8 +194,11 @@
     }
 
     resize() {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
+      const newW = window.innerWidth;
+      const newH = window.innerHeight;
+      if (this.width === newW && Math.abs(this.height - newH) < 100) return;
+      this.width = newW;
+      this.height = newH;
       this.canvas.width = this.width * this.dpr;
       this.canvas.height = this.height * this.dpr;
       this.ctx.scale(this.dpr, this.dpr);
@@ -380,8 +383,11 @@
     }
 
     resize() {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
+      const newW = window.innerWidth;
+      const newH = window.innerHeight;
+      if (this.width === newW && Math.abs(this.height - newH) < 100) return;
+      this.width = newW;
+      this.height = newH;
       this.canvas.width = this.width * this.dpr;
       this.canvas.height = this.height * this.dpr;
       this.ctx.scale(this.dpr, this.dpr);

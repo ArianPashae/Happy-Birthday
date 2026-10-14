@@ -8,7 +8,7 @@
   --violet-accent: #9d4edd;
   --text-main: #f8f9fa;
   --text-muted: #a0a5ba;
-  --glass-bg: rgba(18, 20, 39, 0.65);
+  --glass-bg: rgba(18, 20, 39, 0.72);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
 }
@@ -20,15 +20,23 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-dark);
   background: var(--bg-gradient);
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-main);
   user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Background & Confetti Canvases */
@@ -50,41 +58,45 @@ canvas#confetti-canvas {
   z-index: 10;
 }
 
-/* Main Container */
+/* Main Container - Full height flex with scroll protection */
 .scene-container {
   position: relative;
   z-index: 5;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2.5rem 1.5rem 6.5rem;
-  overflow: hidden;
+  gap: clamp(0.75rem, 2.5vh, 2rem);
+  padding: max(1.2rem, env(safe-area-inset-top)) 1rem max(5.8rem, calc(env(safe-area-inset-bottom) + 5.2rem));
+  box-sizing: border-box;
 }
 
 /* Greeting Header */
 .greeting-wrapper {
   text-align: center;
-  max-width: 760px;
+  max-width: min(760px, 92vw);
+  width: 100%;
+  margin: 0 auto;
   animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .sparkle-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 1.1rem;
+  gap: 0.4rem;
+  padding: 0.3rem 0.95rem;
   background: rgba(255, 209, 92, 0.1);
   border: 1px solid rgba(255, 209, 92, 0.25);
   border-radius: 999px;
   backdrop-filter: blur(8px);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .badge-text {
-  font-size: 0.85rem;
+  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -93,7 +105,7 @@ canvas#confetti-canvas {
 }
 
 .sparkle-icon {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   animation: pulse 2s infinite ease-in-out;
 }
 
@@ -101,15 +113,15 @@ canvas#confetti-canvas {
   display: flex;
   flex-direction: column;
   line-height: 0.95;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .title-sub {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.1rem, 3.4vw, 2.6rem);
   font-weight: 800;
-  letter-spacing: 0.35em;
-  text-indent: 0.35em;
+  letter-spacing: clamp(0.15em, 1.2vw, 0.35em);
+  text-indent: clamp(0.15em, 1.2vw, 0.35em);
   color: #fff;
   opacity: 0.92;
   text-shadow: 0 2px 16px rgba(255, 255, 255, 0.3);
@@ -117,9 +129,9 @@ canvas#confetti-canvas {
 
 .title-main {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 7.5vw, 6rem);
+  font-size: clamp(2.3rem, 7vw, 5.5rem);
   font-weight: 900;
-  letter-spacing: 0.05em;
+  letter-spacing: clamp(0.02em, 0.8vw, 0.05em);
   background: linear-gradient(135deg, #fff 0%, #ffeaa7 40%, #ff7675 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -130,36 +142,40 @@ canvas#confetti-canvas {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  margin: 0.4rem 0 0.8rem;
+  margin: 0.25rem 0 0.5rem;
+  max-width: 95vw;
 }
 
 .recipient-name {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-size: clamp(1.5rem, 4.5vw, 3rem);
   font-weight: 700;
   color: var(--gold-primary);
   text-shadow: 0 0 25px var(--gold-glow);
   letter-spacing: 0.02em;
+  word-break: break-word;
+  text-align: center;
   transition: all 0.3s ease;
 }
 
 .name-underline {
-  width: 70px;
+  width: min(80px, 40%);
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
   border-radius: 2px;
 }
 
 .wish-preview {
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-size: clamp(0.85rem, 2.1vw, 1.1rem);
   color: var(--text-muted);
-  max-width: 580px;
+  max-width: min(580px, 92vw);
   margin: 0 auto;
-  line-height: 1.55;
+  line-height: 1.5;
   font-style: italic;
   font-weight: 300;
+  padding: 0 0.4rem;
 }
 
 /* =========================================
@@ -171,10 +187,12 @@ canvas#confetti-canvas {
   align-items: center;
   cursor: pointer;
   perspective: 1000px;
-  margin: auto 0;
+  margin: 0.5rem 0;
   animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
   opacity: 0;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  touch-action: manipulation;
 }
 
 .cake-stage:hover {
@@ -182,7 +200,7 @@ canvas#confetti-canvas {
 }
 
 .cake-stage:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .cake {
@@ -350,17 +368,19 @@ canvas#confetti-canvas {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-top: 1.2rem;
-  padding: 0.4rem 1rem;
+  margin-top: 0.85rem;
+  padding: 0.35rem 0.9rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.8vw, 0.85rem);
   font-weight: 500;
   color: var(--text-muted);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  text-align: center;
+  max-width: 90vw;
 }
 
 .cake-hint.blown-state {
@@ -370,24 +390,26 @@ canvas#confetti-canvas {
 }
 
 /* =========================================
-   Floating Action Dock
+   Floating Action Dock - Fluid & Touch Safe
    ========================================= */
 .dock {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.8rem;
+  justify-content: space-around;
+  gap: clamp(0.2rem, 1.2vw, 0.65rem);
+  padding: 0.45rem 0.6rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   backdrop-filter: blur(16px);
   box-shadow: var(--glass-shadow);
-  max-width: 95vw;
+  width: calc(100% - 1.8rem);
+  max-width: 440px;
 }
 
 .dock-btn {
@@ -396,15 +418,17 @@ canvas#confetti-canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  padding: 0.5rem 0.85rem;
+  gap: 0.15rem;
+  padding: 0.45rem 0.35rem;
   background: transparent;
   border: none;
-  border-radius: 16px;
+  border-radius: 14px;
   color: var(--text-main);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-  min-width: 58px;
+  flex: 1 1 0;
+  min-width: 0;
+  touch-action: manipulation;
 }
 
 .dock-btn:hover {
@@ -417,15 +441,16 @@ canvas#confetti-canvas {
 }
 
 .dock-icon {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
   line-height: 1;
 }
 
 .dock-label {
-  font-size: 0.72rem;
+  font-size: clamp(0.65rem, 1.6vw, 0.72rem);
   font-weight: 500;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .dock-btn:hover .dock-label {
@@ -451,12 +476,12 @@ canvas#confetti-canvas {
 /* Animated Equalizer Waves */
 .audio-waves {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 4px;
+  right: 4px;
   display: none;
   align-items: flex-end;
   gap: 1.5px;
-  height: 10px;
+  height: 9px;
 }
 
 .audio-waves.playing {
@@ -475,7 +500,7 @@ canvas#confetti-canvas {
 .audio-waves .bar:nth-child(3) { animation-delay: 0.5s; }
 
 /* =========================================
-   Modals
+   Modals - Responsive & Scroll-Safe
    ========================================= */
 .modal-backdrop {
   position: fixed;
@@ -483,13 +508,13 @@ canvas#confetti-canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(4, 5, 12, 0.8);
+  background: rgba(4, 5, 12, 0.85);
   backdrop-filter: blur(12px);
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
@@ -505,8 +530,12 @@ canvas#confetti-canvas {
   background: linear-gradient(145deg, #181a33 0%, #0d0f21 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
-  padding: 2.2rem;
-  max-width: 480px;
+  padding: clamp(1.4rem, 4vw, 2.2rem);
+  max-width: min(480px, calc(100vw - 2rem));
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   width: 100%;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 209, 92, 0.15);
   transform: translateY(20px) scale(0.95);
@@ -519,14 +548,16 @@ canvas#confetti-canvas {
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1.2rem;
+  top: 0.8rem;
+  right: 1rem;
   background: transparent;
   border: none;
   font-size: 1.8rem;
   color: var(--text-muted);
   cursor: pointer;
   line-height: 1;
+  padding: 0.2rem;
+  touch-action: manipulation;
   transition: color 0.2s;
 }
 
@@ -538,45 +569,45 @@ canvas#confetti-canvas {
 .card-decor-top {
   text-align: center;
   color: var(--gold-primary);
-  font-size: 0.85rem;
-  letter-spacing: 0.5em;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  margin-bottom: 0.4rem;
   opacity: 0.8;
 }
 
 .card-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 4.5vw, 2rem);
   text-align: center;
   color: var(--gold-primary);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .card-recipient {
-  font-size: 1.2rem;
+  font-size: clamp(1.05rem, 3vw, 1.2rem);
   font-weight: 600;
   color: #fff;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .card-body {
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: clamp(0.9rem, 2.4vw, 0.98rem);
+  line-height: 1.6;
   color: #cbd5e1;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .card-divider {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  margin: 1.2rem 0;
+  margin: 1rem 0;
 }
 
 .card-quote {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 0.92rem;
+  font-size: clamp(0.85rem, 2.2vw, 0.92rem);
   line-height: 1.5;
   color: var(--gold-primary);
   text-align: center;
@@ -585,34 +616,34 @@ canvas#confetti-canvas {
 
 .card-signature {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
   text-align: right;
   color: var(--pink-neon);
-  margin-top: 1.2rem;
+  margin-top: 1rem;
 }
 
 /* Customize Modal Form */
 .customize-modal .modal-title {
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3.5vw, 1.4rem);
   font-weight: 700;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .customize-modal .modal-subtitle {
-  font-size: 0.9rem;
+  font-size: clamp(0.82rem, 2vw, 0.9rem);
   color: var(--text-muted);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .form-group label {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -625,9 +656,9 @@ canvas#confetti-canvas {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 0.9rem;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: #fff;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -641,16 +672,16 @@ canvas#confetti-canvas {
 
 .form-actions {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
+  gap: 0.65rem;
+  margin-top: 1.2rem;
 }
 
 .btn-action {
   flex: 1;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.85rem;
   border-radius: 14px;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
@@ -658,6 +689,7 @@ canvas#confetti-canvas {
   align-items: center;
   justify-content: center;
   position: relative;
+  touch-action: manipulation;
 }
 
 .btn-apply {
@@ -696,19 +728,22 @@ canvas#confetti-canvas {
 /* Audio Tip Popup */
 .audio-tip {
   position: fixed;
-  top: 1.2rem;
+  top: max(1rem, env(safe-area-inset-top));
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;
-  background: rgba(23, 25, 48, 0.85);
+  background: rgba(23, 25, 48, 0.9);
   border: 1px solid rgba(255, 209, 92, 0.3);
-  padding: 0.45rem 1.1rem;
+  padding: 0.4rem 1rem;
   border-radius: 999px;
-  font-size: 0.82rem;
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
   color: var(--gold-primary);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   pointer-events: none;
+  text-align: center;
+  max-width: 90vw;
+  white-space: nowrap;
   animation: fadeInDown 1s ease forwards, fadeOutUp 1s ease 5s forwards;
 }
 
@@ -752,33 +787,145 @@ canvas#confetti-canvas {
   50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 6px var(--gold-primary)); }
 }
 
-/* Mobile Responsiveness */
+/* =========================================
+   Comprehensive Responsive Breakpoints
+   ========================================= */
+
+/* Mobile Portrait (< 600px) */
 @media (max-width: 600px) {
   .scene-container {
-    padding: 1.5rem 1rem 6rem;
+    padding: max(1rem, env(safe-area-inset-top)) 0.75rem max(5.6rem, calc(env(safe-area-inset-bottom) + 5rem));
+    gap: 0.75rem;
   }
-  .title-sub {
-    font-size: 1.3rem;
-    letter-spacing: 0.25em;
+
+  .cake-stage {
+    transform: scale(0.88);
+    margin: 0.2rem 0;
   }
-  .cake {
-    width: 180px;
-    height: 150px;
+
+  .cake-stage:hover {
+    transform: scale(0.92);
   }
-  .plate { width: 210px; }
-  .layer-bottom { width: 160px; height: 45px; }
-  .layer-middle { width: 120px; height: 38px; bottom: 52px; }
-  .layer-top { width: 90px; height: 32px; bottom: 86px; }
-  .candles-container { bottom: 118px; width: 75px; }
-  
+
   .dock {
-    gap: 0.35rem;
-    padding: 0.45rem 0.55rem;
+    width: calc(100% - 1.2rem);
+    padding: 0.4rem 0.45rem;
+    gap: 0.25rem;
   }
+
   .dock-btn {
-    min-width: 50px;
-    padding: 0.45rem 0.6rem;
+    padding: 0.35rem 0.2rem;
   }
-  .dock-icon { font-size: 1.15rem; }
-  .dock-label { font-size: 0.68rem; }
+}
+
+/* Very Small Mobile (< 380px, e.g. iPhone SE, Fold) */
+@media (max-width: 380px) {
+  .cake-stage {
+    transform: scale(0.78);
+  }
+
+  .cake-stage:hover {
+    transform: scale(0.82);
+  }
+
+  .title-sub {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+  }
+
+  .title-main {
+    font-size: 2.1rem;
+  }
+
+  .recipient-name {
+    font-size: 1.35rem;
+  }
+
+  .dock-label {
+    font-size: 0.62rem;
+  }
+}
+
+/* Short Screen Heights (e.g. Mobile Portrait with Small Height < 720px) */
+@media (max-height: 720px) {
+  .scene-container {
+    gap: 0.5rem;
+  }
+
+  .sparkle-badge {
+    margin-bottom: 0.25rem;
+  }
+
+  .cake-stage {
+    transform: scale(0.8);
+    margin: 0.1rem 0;
+  }
+
+  .cake-stage:hover {
+    transform: scale(0.84);
+  }
+
+  .cake-hint {
+    margin-top: 0.5rem;
+  }
+
+  .wish-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Extremely Short Heights (e.g. < 600px) */
+@media (max-height: 600px) {
+  .cake-stage {
+    transform: scale(0.7);
+  }
+  .wish-preview {
+    display: none;
+  }
+}
+
+/* Mobile Landscape (< 900px wide, < 500px tall) */
+@media (orientation: landscape) and (max-height: 520px) {
+  .scene-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1rem 5rem;
+    gap: 1.5rem;
+  }
+
+  .greeting-wrapper {
+    max-width: 45%;
+    text-align: left;
+    margin: 0;
+  }
+
+  .recipient-name-container {
+    align-items: flex-start;
+  }
+
+  .wish-preview {
+    margin: 0;
+    text-align: left;
+    padding: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cake-stage {
+    transform: scale(0.72);
+    margin: 0;
+  }
+
+  .dock {
+    bottom: 0.5rem;
+    max-width: 400px;
+    padding: 0.35rem 0.5rem;
+  }
 }
